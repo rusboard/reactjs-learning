@@ -3,7 +3,7 @@
 var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
 
-var tasks = [ ];
+var tasks =  [ ];
 
 var localstorage_todo_list = localStorage["todo_list"];
 
@@ -18,6 +18,11 @@ if (0) {
 }
 
 var TodoApp = React.createClass({
+    getInitialState: function () {
+        return {
+            displayedToDoList: tasks
+        };
+    },
     render: function() {
         return (
             <div>
@@ -67,7 +72,7 @@ var TodoTaskList = React.createClass({
     render: function() {
         return (
             <ul>
-                {tasks.map((task, i) => <TodoTaskLine id={i} title={task.title} />)}
+                {tasks.map((task, i) => <TodoTaskLine key={i} title={task.title} />)}
             </ul>
         );
     }
@@ -86,18 +91,20 @@ var TodoTaskLine = React.createClass({
     },
     render: function() {
         return (
-            <li key="{this.props.id}">
+            <li>
                 <input
                     type="checkbox"
-                    checked=""
-                    onChange=""
+                    // checked={}
+                    // onChange={}
                 />
 
                 <span onDoubleClick={this.handleEdit}>{this.props.title}</span>
 
                 <input
+                    type="text"
                     value={this.props.title}
                     onKeyDown={this.handleKeyDown}
+                    onChange={this.handleKeyDown}
                 />
             </li>
         );
