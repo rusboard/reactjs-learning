@@ -3,11 +3,19 @@
 var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
 
-var tasks = [
-    {id: 1, status: 0, name: 'Finish ToDo App'},
-    {id: 2, status: 0, name: 'Go to lunch'},
-    {id: 3, status: 0, name: 'Write email to Pavel'}
-];
+var tasks = [ ];
+
+var localstorage_todo_list = localStorage["todo_list"];
+
+if (0) {
+    console.log(localstorage_todo_list);
+} else {
+    tasks = [
+        {id: 1, status: 0, title: 'Finish ToDo App'},
+        {id: 2, status: 0, title: 'Go to lunch'},
+        {id: 3, status: 0, title: 'Write email to Pavel'}
+    ];
+}
 
 var TodoApp = React.createClass({
     render: function() {
@@ -31,6 +39,11 @@ var TodoAddTask = React.createClass({
     },
     addTaskAction: function() {
         console.log('TodoAddTask: addTaskAction action');
+
+        // var todo_from_storage = localStorage["todo_list"]; // alternative localStorage.getItem('todo_list');
+        // todo_from_storage.push({status: 0, title: 'How add title?'});
+        // localStorage["todo_list"] = todo_from_storage; // alternative localStorage.setItem('todo_list', todo_from_storage)
+
     },
     render: function() {
         return (
@@ -54,7 +67,7 @@ var TodoTaskList = React.createClass({
     render: function() {
         return (
             <ul>
-                {tasks.map((task, i) => <TodoTaskLine id={i} name={task.name} />)}
+                {tasks.map((task, i) => <TodoTaskLine id={i} title={task.title} />)}
             </ul>
         );
     }
@@ -80,10 +93,10 @@ var TodoTaskLine = React.createClass({
                     onChange=""
                 />
 
-                <span onDoubleClick={this.handleEdit}>{this.props.name}</span>
+                <span onDoubleClick={this.handleEdit}>{this.props.title}</span>
 
                 <input
-                    value={this.props.name}
+                    value={this.props.title}
                     onKeyDown={this.handleKeyDown}
                 />
             </li>
