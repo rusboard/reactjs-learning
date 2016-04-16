@@ -1,26 +1,16 @@
 'use strict';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {todo_data} from './todo_data';
+
 var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
-
-var tasks =  [ ];
-
-var localstorage_todo_list = localStorage["todo_list"];
-
-if (0) {
-    console.log(localstorage_todo_list);
-} else {
-    tasks = [
-        {id: 1, status: 0, title: 'Finish ToDo App'},
-        {id: 2, status: 0, title: 'Go to lunch'},
-        {id: 3, status: 0, title: 'Write email to Pavel'}
-    ];
-}
 
 var TodoApp = React.createClass({
     getInitialState: function () {
         return {
-            displayedToDoList: tasks
+            displayedToDoList: todo_data
         };
     },
     render: function() {
@@ -72,7 +62,7 @@ var TodoTaskList = React.createClass({
     render: function() {
         return (
             <ul>
-                {tasks.map((task, i) => <TodoTaskLine key={i} title={task.title} />)}
+                {todo_data.map((task, i) => <TodoTaskLine key={i} title={task.title} />)}
             </ul>
         );
     }
